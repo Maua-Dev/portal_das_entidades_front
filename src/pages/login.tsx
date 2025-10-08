@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
@@ -19,9 +21,11 @@ export default function HomePage() {
           <div className="w-full max-w-md text-center">
             <h2 className="text-2xl font-bold text-gray-800 mb-4">Microsoft Login</h2>
             <p className="text-gray-600 mb-6">Ao clicar no botão abaixo, você será redirecionado para a página de login da Microsoft</p>
-            <div className="bg-gray-100 p-8 rounded-lg border border-gray-200">
-              <span className="text-gray-400">Microsoft login</span>
-            </div>
+            <Link to="/entidades" className="block">
+              <div className="bg-gray-100 p-8 rounded-lg border border-gray-200 hover:bg-gray-200 transition-colors duration-300 w-full cursor-pointer">
+                <button className="text-gray-400 cursor-pointer">Microsoft login</button>
+              </div>
+            </Link>
           </div>
         </div>
       </main>

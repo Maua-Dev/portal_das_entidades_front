@@ -7,7 +7,7 @@ export default function HomePage() {
       {/* Main Content */}
       <main className="flex flex-col md:flex-row h-screen bg-amber-500">
         {/* Left Section - Logo Placeholder */}
-        <div className="w-full md:w-1/2 h-full bg-gray-100 flex items-center justify-center p-8">
+        <div className="w-full md:w-1/2 h-full bg-purple-500 flex items-center justify-center p-8">
           <div className="text-center">
             <div className="w-full h-64 bg-gray-200 rounded-lg flex items-center justify-center mb-4">
               <span className="text-gray-400">Logo</span>

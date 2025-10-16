@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import devCommunityLogo from "../assets/dev-community.png";
 import guardianLogo from "../assets/guardian.png";
 import mauaEsportsLogo from "../assets/maua-esports.png";
@@ -42,7 +43,7 @@ export default function EntidadesButtons({ isColorido }: EntidadesButtonsProps) 
       {entidades.map((entidade) => (
         <div key={entidade.id} className="flex flex-col items-center w-36">
           {isColorido ? (
-            <a href="#" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center group">
+            <Link to={`/home/${entidade.id}`} className="flex flex-col items-center group">
               <img
                 src={entidade.imageUrl}
                 alt={entidade.name}
@@ -52,7 +53,7 @@ export default function EntidadesButtons({ isColorido }: EntidadesButtonsProps) 
               <button className="mt-2 text-sm font-medium text-white bg-indigo-600 px-3 py-1 rounded-lg transition group-hover:bg-indigo-700">
                 Acessar
               </button>
-            </a>
+            </Link>
           ) : (
             <div className="flex flex-col items-center opacity-60 cursor-not-allowed">
               <img

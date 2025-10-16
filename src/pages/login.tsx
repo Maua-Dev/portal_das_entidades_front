@@ -1,13 +1,16 @@
 import { Link } from "react-router-dom";
+import LoginBG from "../assets/login-bg.jpg"
 
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
 
       {/* Main Content */}
-      <main className="flex flex-col md:flex-row h-screen bg-amber-500">
+      <main className="flex flex-col md:flex-row h-screen">
         {/* Left Section - Logo Placeholder */}
-        <div className="w-full md:w-1/2 h-full bg-purple-500 flex items-center justify-center p-8">
+        <div className="w-full md:w-1/2 h-full flex items-center justify-center p-8 bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${LoginBG})` }}
+        >
           <div className="text-center">
             <div className="w-full h-64 bg-gray-200 rounded-lg flex items-center justify-center mb-4">
               <span className="text-gray-400">Logo</span>

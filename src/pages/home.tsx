@@ -4,6 +4,7 @@ import ProfileButton from "../components/profile";
 import ArrowButton from "../components/arrow"
 import { Link } from "react-router-dom";
 
+
 export default function Home() {
     // const { entityId } = useParams();
 

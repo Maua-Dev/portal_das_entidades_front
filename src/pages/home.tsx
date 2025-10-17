@@ -1,6 +1,7 @@
 // import { useParams } from "react-router-dom";
 import homeBackGround from "../assets/home-bg.jpg"
 import ProfileButton from "../components/profile";
+import ArrowButton from "../components/arrow"
 
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
             style={{ backgroundImage: `url(${homeBackGround})` }}
         >
             <ProfileButton></ProfileButton>
+            <ArrowButton></ArrowButton>
         </div>
     );
 }

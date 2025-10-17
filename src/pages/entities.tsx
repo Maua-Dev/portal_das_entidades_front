@@ -9,7 +9,7 @@ export default function Entities() {
   return (
     <div className="relative min-h-screen bg-blue-100 flex items-center justify-center">
       <SetColors isColorido={isColorido} setIsColorido={setIsColorido} />
-      <EntidadesButtons isColorido={isColorido} />
+      <EntidadesButtons isColorido={isColorido} size={{width: "w-48", height: "h-48" }}/>
       <ProfileButton className="bg-blue-950"></ProfileButton>
     </div>
   );

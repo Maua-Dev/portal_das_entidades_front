@@ -1,9 +1,10 @@
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import homeBackGround from "../assets/home-bg.jpg"
+import ProfileButton from "../components/profile";
 
 
 export default function Home() {
-    const { entityId } = useParams();
+    // const { entityId } = useParams();
 
 
     return (
@@ -11,7 +12,7 @@ export default function Home() {
             className="min-h-screen bg-cover bg-center bg-no-repeat"
             style={{ backgroundImage: `url(${homeBackGround})` }}
         >
-        {entityId}
+            <ProfileButton></ProfileButton>
         </div>
     );
 }

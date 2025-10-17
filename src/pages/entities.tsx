@@ -10,7 +10,7 @@ export default function Entities() {
     <div className="relative min-h-screen bg-blue-100 flex items-center justify-center">
       <SetColors isColorido={isColorido} setIsColorido={setIsColorido} />
       <EntidadesButtons isColorido={isColorido} />
-      <ProfileButton></ProfileButton>
+      <ProfileButton className="bg-blue-950"></ProfileButton>
     </div>
   );
 }

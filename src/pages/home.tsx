@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import AddButton from "../components/add-button";
 import ImportButton from "../components/import-button";
 import ExportButton from "../components/export-button";
+import BellButton from "../components/bell-button";
 
 const Alunos = [
     {
@@ -346,10 +347,13 @@ export default function Home() {
             </Link>
 
             <div className="absolute top-28 inset-x-6 max-w-5/6 mx-auto border-1 border-amber-700">
-                <div className="space-x-4">
-                    <AddButton />
-                    <ImportButton />
-                    <ExportButton></ExportButton>
+                 <div className="flex justify-between items-center">
+                    <div className="flex space-x-4">
+                        <AddButton />
+                        <ImportButton />
+                        <ExportButton />
+                    </div>
+                    <BellButton />
                 </div>
             </div>
         </div>

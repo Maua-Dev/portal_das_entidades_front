@@ -7,6 +7,7 @@ import AddButton from "../components/add-button";
 import ImportButton from "../components/import-button";
 import ExportButton from "../components/export-button";
 import BellButton from "../components/bell-button";
+import SearchBar from "../components/search-bar";
 
 const Alunos = [
     {
@@ -354,6 +355,9 @@ export default function Home() {
                         <ExportButton />
                     </div>
                     <BellButton />
+                </div>
+                <div className="pt-4 w-1/2">
+                    <SearchBar></SearchBar>
                 </div>
             </div>
         </div>

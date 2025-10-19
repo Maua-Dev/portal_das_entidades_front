@@ -18,7 +18,7 @@ export default function ImportButton({
 
               <button
                 type="button"
-                className="py-1 pl-1 rounded-full text-white active:scale-95 transition"
+                className="py-2 pl-1 rounded-full text-white active:scale-95 transition"
                 aria-label={label}
               >
                 <HiDownload size={iconSize} className='cursor-pointer'/>

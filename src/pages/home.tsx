@@ -328,6 +328,7 @@ const Alunos = [
     }
 ]
 
+
 export default function Home() {
     // const { entityId } = useParams();
 

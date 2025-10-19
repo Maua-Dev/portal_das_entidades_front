@@ -55,11 +55,9 @@ export default function EntidadesButtons({
                 src={entidade.imageUrl}
                 alt={entidade.name}
                 className={`rounded-4xl ${size.width} ${size.height} object-cover shadow-lg transition 
-                         grayscale-0 group-hover:scale-105 group-hover:shadow-xl `}
+                         grayscale-0 group-hover:scale-110 group-hover:shadow-xl `}
               />
-              <button className="mt-2 text-sm font-medium text-white bg-indigo-600 px-3 py-1 rounded-lg transition group-hover:bg-indigo-700">
-                Acessar
-              </button>
+              
             </Link>
           ) : (
             <div className="flex flex-col items-center opacity-60 cursor-not-allowed">
@@ -68,9 +66,7 @@ export default function EntidadesButtons({
                 alt={entidade.name}
                 className={`rounded-4xl ${size.width} ${size.height} object-cover shadow-lg grayscale`}
               />
-              <button disabled className="mt-2 text-sm font-medium text-white bg-gray-400 px-3 py-1 rounded-lg">
-                Acessar
-              </button>
+
             </div>
           )}
         </div>

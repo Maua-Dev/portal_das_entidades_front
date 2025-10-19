@@ -4,6 +4,7 @@ import ProfileButton from "../components/profile";
 import ArrowButton from "../components/arrow"
 import { Link } from "react-router-dom";
 import AddButton from "../components/add-button";
+import ImportButton from "../components/import-button";
 
 const Alunos = [
     {
@@ -343,9 +344,11 @@ export default function Home() {
                 <ArrowButton></ArrowButton>
             </Link>
 
-            <div className="absolute top-28 inset-x-6 max-w-5/6 mx-auto px- border-1 border-amber-700">
-                <AddButton></AddButton>
-                
+            <div className="absolute top-28 inset-x-6 max-w-5/6 mx-auto border-1 border-amber-700">
+                <div className="space-x-4">
+                    <AddButton />
+                    <ImportButton />
+                </div>
             </div>
         </div>
     );

@@ -5,6 +5,7 @@ import ArrowButton from "../components/arrow"
 import { Link } from "react-router-dom";
 import AddButton from "../components/add-button";
 import ImportButton from "../components/import-button";
+import ExportButton from "../components/export-button";
 
 const Alunos = [
     {
@@ -348,6 +349,7 @@ export default function Home() {
                 <div className="space-x-4">
                     <AddButton />
                     <ImportButton />
+                    <ExportButton></ExportButton>
                 </div>
             </div>
         </div>

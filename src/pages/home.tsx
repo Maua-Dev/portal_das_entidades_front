@@ -339,7 +339,7 @@ export default function Home() {
 
     return (
         <div 
-            className="min-h-screen bg-cover bg-center bg-no-repeat relative"
+            className="min-h-screen bg-cover bg-center bg-no-repeat bg-fixed relative"
             style={{ backgroundImage: `url(${homeBackGround})` }}
         >
             <ProfileButton></ProfileButton>
@@ -347,7 +347,7 @@ export default function Home() {
                 <ArrowButton></ArrowButton>
             </Link>
 
-            <div className="absolute top-28 inset-x-6 max-w-5/6 mx-auto border-1 border-amber-700">
+            <div className="absolute top-28 inset-x-6 max-w-5/6 mx-auto">
                  <div className="flex justify-between items-center">
                     <div className="flex space-x-4">
                         <AddButton />
@@ -356,8 +356,45 @@ export default function Home() {
                     </div>
                     <BellButton />
                 </div>
-                <div className="pt-4 w-1/2">
+                <div className="py-4 w-1/2">
                     <SearchBar></SearchBar>
+                </div>
+                <div className="mt-4 bg-white rounded-3xl shadow overflow-y-auto px-6 max-h-[750px]">
+                    <table className="min-w-full">
+                        <thead className="bg-gray-50 sticky top-0 z-10 shadow-[0_2px_0_0_rgba(209,213,219,1)]">
+                            <tr>
+                                <th className="w-4/12 px-6 pt-4 pb-6 text-left font-bold text-gray-400 uppercase tracking-wider">Nome</th>
+                                <th className="px-6 pt-4 pb-6 text-center font-bold text-gray-400 uppercase tracking-wider">RA</th>
+                                <th className="px-6 pt-4 pb-6 text-center font-bold text-gray-400 uppercase tracking-wider">Curso</th>
+                                <th className="px-6 pt-4 pb-6 text-center font-bold text-gray-400 uppercase tracking-wider">Período</th>
+                                <th className="px-6 pt-4 pb-6 text-center font-bold text-gray-400 uppercase tracking-wider">Status</th>
+                                <th className="px-6 pt-4 pb-6 text-center font-bold text-gray-400 uppercase tracking-wider">Entidade</th>
+                            </tr>
+                        </thead>
+                        <tbody className="bg-white divide-y divide-gray-200">
+                            {Alunos.map((aluno) => (
+                                <tr key={aluno.RA}>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{aluno.nome}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{aluno.RA}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{aluno.curso}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{aluno.periodo}º período</td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm">
+                                        <span className={`px-2 py-2 text-xs flex leading-5 font-semibold rounded-full w-28
+                                            ${aluno.status === 'PASSOU' ? 'bg-green-100 text-green-800' : 
+                                            aluno.status === 'NAO_PASSOU' ? 'bg-red-100 text-red-800' : 
+                                            'bg-yellow-100 text-yellow-800'}`}>
+                                            {aluno.status}
+                                        </span>
+                                    </td>
+                                    <td className="py-4 whitespace-nowrap text-sm text-center">
+                                        <span className="bg-gray-200 px-3 py-2 rounded-full text-gray-700 inline-block w-32">
+                                            {aluno.entidade}
+                                        </span>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

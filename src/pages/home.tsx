@@ -8,6 +8,7 @@ import ImportButton from "../components/import-button";
 import ExportButton from "../components/export-button";
 import BellButton from "../components/bell-button";
 import SearchBar from "../components/search-bar";
+import { COURSES } from "../utils/enums/course";
 
 const Alunos = [
     {
@@ -376,7 +377,7 @@ export default function Home() {
                                 <tr key={aluno.RA}>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{aluno.nome}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{aluno.RA}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{aluno.curso}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{COURSES[aluno.curso as keyof typeof COURSES]}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{aluno.periodo}º período</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm">
                                         <span className={`px-2 py-2 text-xs flex leading-5 font-semibold rounded-full w-28

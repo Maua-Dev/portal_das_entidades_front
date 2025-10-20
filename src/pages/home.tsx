@@ -391,12 +391,18 @@ export default function Home() {
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{COURSES[aluno.curso as keyof typeof COURSES]}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{aluno.periodo}º período</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm">
-                                        <span className={`px-2 py-2 text-xs flex items-center justify-center leading-5 font-semibold rounded-full w-28 
-                                            ${aluno.status === 'PASSOU' ? 'bg-green-100 text-green-800' : 
-                                            aluno.status === 'NAO_PASSOU' ? 'bg-red-100 text-red-800' : 
-                                            'bg-yellow-100 text-yellow-800'}`}>
-                                            {aluno.status}
-                                        </span>
+                                        <select
+                                            value={aluno.status}
+                                            className={`px-2 py-2 text-xs text-center font-semibold rounded-full w-28 leading-5 
+                                                cursor-pointer transition-all duration-500 ease-in-out transform hover:scale-105
+                                                ${aluno.status === 'PASSOU' ? 'bg-green-100 text-green-800' : 
+                                                aluno.status === 'NAO_PASSOU' ? 'bg-red-100 text-red-800' : 
+                                                'bg-yellow-100 text-yellow-800'}`}
+                                        >
+                                            <option value="PASSOU" className="bg-green-100 text-green-800">PASSOU</option>
+                                            <option value="NAO_PASSOU" className="bg-red-100 text-red-800">NAO_PASSOU</option>
+                                            <option value="CONGELADO" className="bg-yellow-100 text-yellow-800">CONGELADO</option>
+                                        </select>
                                     </td>
                                     <td className="py-4 whitespace-nowrap text-sm text-center">
                                         <span className="bg-gray-200 px-3 py-2 rounded-full text-gray-700 inline-block w-32">

@@ -370,7 +370,7 @@ export default function Home() {
                         onChange={setSearchTerm}
                     />
                 </div>
-                <div className="mt-4 bg-white rounded-3xl shadow overflow-y-auto px-6 max-h-[750px]">
+                <div className="mt-4 bg-white rounded-3xl shadow overflow-y-auto px-6 max-h-[70vh]">
                     <table className="min-w-full">
                         <thead className="bg-gray-50 sticky top-0 z-10 shadow-[0_2px_0_0_rgba(209,213,219,1)]">
                             <tr>
@@ -391,7 +391,7 @@ export default function Home() {
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{COURSES[aluno.curso as keyof typeof COURSES]}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{aluno.periodo}º período</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm">
-                                        <span className={`px-2 py-2 text-xs flex leading-5 font-semibold rounded-full w-28
+                                        <span className={`px-2 py-2 text-xs flex items-center justify-center leading-5 font-semibold rounded-full w-28 
                                             ${aluno.status === 'PASSOU' ? 'bg-green-100 text-green-800' : 
                                             aluno.status === 'NAO_PASSOU' ? 'bg-red-100 text-red-800' : 
                                             'bg-yellow-100 text-yellow-800'}`}>

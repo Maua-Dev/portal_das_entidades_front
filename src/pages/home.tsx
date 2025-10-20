@@ -1,4 +1,5 @@
 // import { useParams } from "react-router-dom";
+import { useState } from "react";
 import homeBackGround from "../assets/home-bg.jpg"
 import ProfileButton from "../components/profile";
 import ArrowButton from "../components/arrow"
@@ -336,6 +337,12 @@ const Alunos = [
 
 export default function Home() {
     // const { entityId } = useParams();
+    const [searchTerm, setSearchTerm] = useState("");
+
+    const alunosFiltrados = Alunos.filter((aluno) =>
+        aluno.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        aluno.RA.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
 
     return (
@@ -358,7 +365,10 @@ export default function Home() {
                     <BellButton />
                 </div>
                 <div className="py-4 w-1/2">
-                    <SearchBar></SearchBar>
+                    <SearchBar
+                        value={searchTerm}
+                        onChange={setSearchTerm}
+                    />
                 </div>
                 <div className="mt-4 bg-white rounded-3xl shadow overflow-y-auto px-6 max-h-[750px]">
                     <table className="min-w-full">
@@ -373,7 +383,8 @@ export default function Home() {
                             </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-gray-200">
-                            {Alunos.map((aluno) => (
+                            {alunosFiltrados.length > 0 ? (
+                                alunosFiltrados.map((aluno) => (
                                 <tr key={aluno.RA}>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{aluno.nome}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{aluno.RA}</td>
@@ -393,7 +404,17 @@ export default function Home() {
                                         </span>
                                     </td>
                                 </tr>
-                            ))}
+                            ))
+                        ) : (
+                            <tr>
+                                <td
+                                    colSpan={6}
+                                    className="text-center py-6 text-gray-400 italic"
+                                >
+                                    Nenhum aluno encontrado.
+                                </td>
+                            </tr>
+                        )}
                         </tbody>
                     </table>
                 </div>

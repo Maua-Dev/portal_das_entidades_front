@@ -10,7 +10,7 @@
          spacing?: string; // opcional, ex.: "space-y-4" ou "space-y-6"
        };
 
-       export default React.memo(function Filters({
+       export default React.memo(function FiltroCheckboxList({
          title,
          options,
          onApply,

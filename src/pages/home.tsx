@@ -9,6 +9,7 @@ import ImportButton from "../components/import-button";
 import ExportButton from "../components/export-button";
 import BellButton from "../components/bell-button";
 import SearchBar from "../components/search-bar";
+import FiltersBar from "../components/FilterBar";
 import { COURSES } from "../utils/enums/course";
 
 const Alunos = [
@@ -364,15 +365,21 @@ export default function Home() {
                     </div>
                     <BellButton />
                 </div>
-                <div className="py-4 w-1/2">
-                    <SearchBar
-                        value={searchTerm}
-                        onChange={setSearchTerm}
-                    />
-                </div>
+                <div className="py-4">
+                    <div className="flex items-center justify-between gap-4">
+                        {/* esquerda: busca ocupa o espaço */}
+                        <div className="flex-1">
+                            <SearchBar
+                                value={searchTerm}
+                                onChange={setSearchTerm}
+                            />
+                         </div>
+                             <FiltersBar />
+                         </div>
+                    </div>
                 <div className="mt-4 bg-white rounded-3xl shadow overflow-y-auto px-6 max-h-[70vh]">
                     <table className="min-w-full">
-                        <thead className="bg-gray-50 sticky top-0 z-10 shadow-[0_2px_0_0_rgba(209,213,219,1)]">
+                        <thead className="bg-gray-50 sticky top-0 shadow-[0_2px_0_0_rgba(209,213,219,1)]">
                             <tr>
                                 <th className="w-4/12 px-6 pt-4 pb-6 text-left font-bold text-gray-400 uppercase tracking-wider">Nome</th>
                                 <th className="px-6 pt-4 pb-6 text-center font-bold text-gray-400 uppercase tracking-wider">RA</th>

@@ -1,7 +1,6 @@
 import React, { useState, useCallback } from "react";
 import FiltroCheckboxList from "../components/Filters"; // Ajuste o caminho se necessário
 
-// Constantes para dados (melhora legibilidade e reutilização)
 const CURSOS = [
   "Engenharia da Computação",
   "Engenharia de Produção",
@@ -17,7 +16,6 @@ const PERIODOS = [
 
 const STATUS_LIST = ["Aprovado", "Reprovado", "Em análise", "Inativo"];
 
-// Constantes para classes (reduz repetição)
 const buttonClasses = "rounded-xl bg-[#d9e6f5] px-3 py-2 text-sm font-medium text-gray-800 hover:bg-[#c9d8ea] flex items-center justify-between min-w-[110px]";
 
 export default React.memo(function FiltersBar() {
@@ -52,14 +50,12 @@ export default React.memo(function FiltersBar() {
                 title="Curso"
                 options={CURSOS}
                 onApply={(sel: string[]) => console.log("Aplicar Curso:", sel)}
-                onCancel={() => toggleFilter("curso")} // Fecha ao cancelar
+                onCancel={() => toggleFilter("curso")} 
                 idPrefix="curso"
               />
             </div>
           )}
         </div>
-
-        {/* Filtro de Período */}
         <div className="relative">
           <button
             onClick={() => toggleFilter("periodo")}
@@ -83,8 +79,6 @@ export default React.memo(function FiltersBar() {
             </div>
           )}
         </div>
-
-        {/* Filtro de Status */}
         <div className="relative">
           <button
             onClick={() => toggleFilter("status")}

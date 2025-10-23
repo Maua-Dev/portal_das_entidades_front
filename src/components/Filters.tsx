@@ -6,9 +6,9 @@ type FiltroCheckboxListProps = {
   options: string[];
   onApply: (selected: string[]) => void;
   onCancel: () => void;
-  idPrefix: string; // ex.: "curso", "periodo", "status"
-  spacing?: string; // opcional, ex.: "space-y-2" ou "space-y-3" (reduzido)
-  className?: string; // Novo: para overrides de posição/escala no FiltersBar.tsx
+  idPrefix: string; 
+  spacing?: string; 
+  className?: string; 
 };
 
 export default React.memo(function FiltroCheckboxList({
@@ -17,7 +17,7 @@ export default React.memo(function FiltroCheckboxList({
   onApply,
   onCancel,
   idPrefix,
-  spacing = "space-y-2", // Reduzido de "space-y-4" para compactar
+  spacing = "space-y-2", 
   className = "",
 }: FiltroCheckboxListProps) {
   const [selected, setSelected] = useState<string[]>([]);
@@ -32,15 +32,15 @@ export default React.memo(function FiltroCheckboxList({
   const renderOption = (opt: string) => {
     const checked = selected.includes(opt);
     return (
-      <li key={opt} className="flex items-center gap-2"> {/* Reduzido de gap-3 para gap-2 */}
+      <li key={opt} className="flex items-center gap-2"> 
         <input
           id={`${idPrefix}-${opt}`}
           type="checkbox"
           checked={checked}
           onChange={() => toggle(opt)}
-          className="h-4 w-4 rounded border-gray-400 text-gray-800 focus:ring-0" // Reduzido de h-5 w-5 para h-4 w-4
+          className="h-4 w-4 rounded border-gray-400 text-gray-800 focus:ring-0" 
         />
-        <label htmlFor={`${idPrefix}-${opt}`} className="select-none text-base text-gray-800"> {/* Reduzido de text-lg para text-base */}
+        <label htmlFor={`${idPrefix}-${opt}`} className="select-none text-base text-gray-800">
           {opt}
         </label>
       </li>
@@ -53,7 +53,7 @@ export default React.memo(function FiltroCheckboxList({
       onApply={() => onApply(selected)}
       onCancel={onCancel}
       onClear={clear}
-      className={className} // Passa className para FilterBox.tsx
+      className={className} 
     >
       <ul className={spacing} role="group" aria-label={`Selecionar ${title.toLowerCase()}`}>
         {options.map(renderOption)}

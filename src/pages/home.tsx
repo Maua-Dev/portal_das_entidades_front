@@ -367,7 +367,6 @@ export default function Home() {
                 </div>
                 <div className="py-4">
                     <div className="flex items-center justify-between gap-4">
-                        {/* esquerda: busca ocupa o espaço */}
                         <div className="flex-1">
                             <SearchBar
                                 value={searchTerm}

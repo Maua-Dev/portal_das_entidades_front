@@ -22,11 +22,11 @@ export default function HomePage() {
 
   if (isAuth) {
     fetchAccessToken();
+    console.log("User is authenticated, navigating to /entidades");
     navigate("/entidades");
   }
 
   const handleLogin = () => {
-    console.log("Login button clicked");
     instance.loginPopup({ scopes: ["User.Read"] }).catch((error) => {
       console.error("Login error:", error);
     });

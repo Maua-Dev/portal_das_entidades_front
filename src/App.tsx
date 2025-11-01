@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Login from "./pages/login";
 import Entities from "./pages/entities.tsx";
 import Home from "./pages/home.tsx";
@@ -7,7 +7,7 @@ import { MsalProvider } from "@azure/msal-react";
 
 export default function App() {
   return (
-    <div>
+    <BrowserRouter>
       <MsalProvider instance={msalInstance}>
         <Routes>
           <Route path="/" element={<Login />} />
@@ -15,6 +15,6 @@ export default function App() {
           <Route path="/home/:entityId" element={<Home />}></Route>
         </Routes>
       </MsalProvider>
-    </div>
+    </BrowserRouter>
   );
 }

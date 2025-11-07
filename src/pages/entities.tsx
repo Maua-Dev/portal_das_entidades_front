@@ -3,7 +3,7 @@ import EntidadesButtons from "../components/Entity_buttons";
 import SetColors from "../components/set_colors";
 import ProfileButton from "../components/profile";
 import { useMsal } from "@azure/msal-react";
-import { authUser } from "../hooks/use-user";
+import { useAuthUser } from "../hooks/use-user";
 
 export default function Entities() {
   const [isColorido, setIsColorido] = useState(true);
@@ -18,7 +18,7 @@ export default function Entities() {
     });
   };
 
-  authUser();
+  useAuthUser();
 
   return (
     <div className="relative min-h-screen bg-blue-100 flex items-center justify-center">

@@ -26,6 +26,8 @@ export interface UsersPayload {
 
 export interface UsersContextValue {
   users: User[];
+  profile: User | null;
+  uploadProfile: (user: User) => void;
   setUsers: (users: User[]) => void;
   addUser: (user: User) => void;
   updateUser: (userId: string, patch: Partial<User>) => void;
@@ -37,7 +39,12 @@ export interface UsersContextValue {
 const UsersContext = createContext<UsersContextValue | undefined>(undefined);
 
 export function UsersProvider({ children }: { children: ReactNode }) {
+  const [profile, setProfile] = useState<User | null>(null);
   const [users, setUsers] = useState<User[]>([]);
+
+  function uploadProfile(user: User) {
+    setProfile(user);
+  }
 
   function addUser(user: User) {
     setUsers((prev) => [...prev, user]);
@@ -64,6 +71,8 @@ export function UsersProvider({ children }: { children: ReactNode }) {
   }
 
   const value: UsersContextValue = {
+    profile,
+    uploadProfile,
     users,
     setUsers,
     addUser,

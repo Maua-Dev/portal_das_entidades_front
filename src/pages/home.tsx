@@ -1,5 +1,5 @@
 // import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import homeBackGround from "../assets/home-bg.jpg";
 import ProfileButton from "../components/profile";
 import ArrowButton from "../components/arrow";
@@ -17,12 +17,15 @@ import { useAllUsers } from "../hooks/use-user";
 export default function Home() {
   // const { entityId } = useParams();
   const [searchTerm, setSearchTerm] = useState("");
-  const { data } = useAllUsers();
+  const { data, isLoading } = useAllUsers();
 
   const { users, loadFromPayload } = useUsers();
-  if (data && data.users) {
-    loadFromPayload(data);
-  }
+
+  useEffect(() => {
+    if (data) {
+      loadFromPayload(data);
+    }
+  }, [data, loadFromPayload]);
 
   const alunosFiltrados = users.filter(
     (aluno) =>
@@ -138,6 +141,28 @@ export default function Home() {
                     </td>
                   </tr>
                 ))
+              ) : isLoading ? (
+                <tr>
+                  <td colSpan={6}>
+                    <div className="max-w-xs mx-auto gap-10 flex items-center justify-center">
+                      <div className="text-9xl duration-300 animate-bounce">
+                        .
+                      </div>
+                      <div
+                        className="text-9xl duration-300 animate-bounce"
+                        style={{ animationDelay: "150ms" }}
+                      >
+                        .
+                      </div>
+                      <div
+                        className="text-9xl duration-300 animate-bounce"
+                        style={{ animationDelay: "300ms" }}
+                      >
+                        .
+                      </div>
+                    </div>
+                  </td>
+                </tr>
               ) : (
                 <tr>
                   <td

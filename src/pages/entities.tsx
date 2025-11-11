@@ -1,13 +1,11 @@
-import { useState } from "react";
 import EntidadesButtons from "../components/Entity_buttons";
-import SetColors from "../components/set_colors";
 import ProfileButton from "../components/profile";
 import { useMsal } from "@azure/msal-react";
 import { useAuthUser } from "../hooks/use-user";
+import { useEffect } from "react";
+import { useUsers } from "../context/user-context";
 
 export default function Entities() {
-  const [isColorido, setIsColorido] = useState(true);
-
   const { instance } = useMsal();
 
   const handleLogout = () => {
@@ -17,16 +15,43 @@ export default function Entities() {
       console.error("Logout error:", error);
     });
   };
+  const { data } = useAuthUser();
+  const { profile, uploadProfile } = useUsers();
 
-  useAuthUser();
+  useEffect(() => {
+    if (data) {
+      uploadProfile(data.user);
+    }
+  }, [data, uploadProfile]);
+
+  if (!profile) {
+    return (
+      <div className="relative min-h-screen bg-blue-100 gap-10 flex items-center justify-center">
+        <div className="text-9xl  duration-300 animate-bounce ">.</div>
+        <div
+          className="text-9xl  duration-300 animate-bounce "
+          style={{ animationDelay: "150ms" }}
+        >
+          .
+        </div>
+        <div
+          className="text-9xl  duration-300 animate-bounce "
+          style={{ animationDelay: "300ms" }}
+        >
+          .
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative min-h-screen bg-blue-100 flex items-center justify-center">
       <button
         onClick={handleLogout}
-        className="absolute top-4 right-20 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+        className="absolute top-24 right-4 flex items-center gap-2 bg-gradient-to-r from-red-500 to-red-700 text-white px-5 py-2 rounded-full shadow-lg hover:from-red-600 hover:to-red-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-400 hover:cursor-pointer"
+        title="Sair da conta"
       >
-        logout
+        Sair
       </button>
       {/* loading mask */}
       {/* {<div className="absolute inset-0 bg-gray-500 opacity-75">
@@ -34,12 +59,12 @@ export default function Entities() {
           <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-64 w-64"></div>
         </div>
       </div>} */}
-      <SetColors isColorido={isColorido} setIsColorido={setIsColorido} />
       <EntidadesButtons
-        isColorido={isColorido}
+        isAdmin={profile.role === "ADM"}
+        organization={profile.organization || ""}
         size={{ width: "w-48", height: "h-48" }}
       />
-      <ProfileButton className="bg-blue-950"></ProfileButton>
+      <ProfileButton className="bg-blue-950" />
     </div>
   );
 }

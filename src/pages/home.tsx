@@ -13,10 +13,15 @@ import FiltersBar from "../components/FilterBar";
 import { COURSES } from "../utils/enums/course";
 import { useUsers } from "../context/user-context";
 import { useAllUsers } from "../hooks/use-user";
+import CustomModal from "../components/custom-modal";
+import ImportForm from "../components/import-form";
 
 export default function Home() {
   // const { entityId } = useParams();
   const [searchTerm, setSearchTerm] = useState("");
+
+  const [importFormOpen, setImportFormOpen] = useState<boolean>(false);
+
   const { data, isLoading } = useAllUsers();
 
   const { users, loadFromPayload } = useUsers();
@@ -38,6 +43,13 @@ export default function Home() {
       className="min-h-screen bg-cover bg-center bg-no-repeat bg-fixed relative"
       style={{ backgroundImage: `url(${homeBackGround})` }}
     >
+      <CustomModal
+        isOpen={importFormOpen}
+        onClose={() => setImportFormOpen(false)}
+        title={"Importar Dados"}
+      >
+        <ImportForm />
+      </CustomModal>
       <ProfileButton></ProfileButton>
       <Link to="/entidades">
         <ArrowButton></ArrowButton>
@@ -47,7 +59,7 @@ export default function Home() {
         <div className="flex justify-between items-center">
           <div className="flex space-x-4">
             <AddButton />
-            <ImportButton />
+            <ImportButton onClick={() => setImportFormOpen(true)} />
             <ExportButton />
           </div>
           <BellButton />
@@ -102,7 +114,8 @@ export default function Home() {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm">
                       <select
-                        value={aluno.state}
+                        value={aluno.state ?? ""}
+                        onChange={() => {}}
                         className={`px-2 py-2 text-xs text-center font-semibold rounded-full w-28 leading-5 
                                                 cursor-pointer transition-all duration-500 ease-in-out transform hover:scale-105
                                                 ${

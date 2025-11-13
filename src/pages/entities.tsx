@@ -1,9 +1,12 @@
 import EntidadesButtons from "../components/Entity_buttons";
+import AdminButton from "../components/admin_button";
 import ProfileButton from "../components/profile";
 import { useMsal } from "@azure/msal-react";
 import { useAuthUser } from "../hooks/use-user";
 import { useEffect } from "react";
 import { useUsers } from "../context/user-context";
+import { PiNewspaperLight } from "react-icons/pi";
+import { MdPhoneAndroid } from "react-icons/md";
 
 export default function Entities() {
   const { instance } = useMsal();
@@ -53,17 +56,29 @@ export default function Entities() {
       >
         Sair
       </button>
-      {/* loading mask */}
-      {/* {<div className="absolute inset-0 bg-gray-500 opacity-75">
-        <div className="flex items-center justify-center h-full">
-          <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-64 w-64"></div>
+      {profile.role === "ADM" && (
+        <div className="flex gap-10 text-white">
+          <AdminButton
+            title="Permissão"
+            subtitle="Gerencie permissões"
+            icon={<PiNewspaperLight size={60} />}
+            to="/admin/member"
+          />
+          <AdminButton
+            title="Consulta"
+            subtitle="Consultar dados"
+            icon={<MdPhoneAndroid size={50} />}
+            to="/home/:entityId"
+          />
         </div>
-      </div>} */}
-      <EntidadesButtons
-        isAdmin={profile.role === "ADM"}
-        organization={profile.organization || ""}
-        size={{ width: "w-48", height: "h-48" }}
-      />
+      )}
+      {profile.role === "PRESIDENT" && (
+        <EntidadesButtons
+          isAdmin={false}
+          organization={profile.organization || ""}
+          size={{ width: "w-48", height: "h-48" }}
+        />
+      )}
       <ProfileButton className="bg-blue-950" />
     </div>
   );

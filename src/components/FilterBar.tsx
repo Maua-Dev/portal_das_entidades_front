@@ -10,20 +10,31 @@ const CURSOS = [
 ];
 
 const PERIODOS = [
-  "1º semestre", "2º semestre", "3º semestre", "4º semestre", "5º semestre",
-  "6º semestre", "7º semestre", "8º semestre", "9º semestre", "10º semestre",
+  "1º semestre",
+  "2º semestre",
+  "3º semestre",
+  "4º semestre",
+  "5º semestre",
+  "6º semestre",
+  "7º semestre",
+  "8º semestre",
+  "9º semestre",
+  "10º semestre",
 ];
 
 const STATUS_LIST = ["Aprovado", "Reprovado", "Em análise", "Inativo"];
 
-const buttonClasses = "rounded-xl bg-[#d9e6f5] px-3 py-2 text-sm font-medium text-gray-800 hover:bg-[#c9d8ea] flex items-center justify-between min-w-[110px]";
+const buttonClasses =
+  "rounded-xl bg-[#d9e6f5] px-3 py-2 text-sm font-medium text-gray-800 hover:bg-[#c9d8ea] flex items-center justify-between min-w-[110px]";
 
 export default React.memo(function FiltersBar() {
   const [openFilters, setOpenFilters] = useState<string[]>([]);
 
   const toggleFilter = useCallback((filter: string) => {
     setOpenFilters((prev) =>
-      prev.includes(filter) ? prev.filter((f) => f !== filter) : [...prev, filter]
+      prev.includes(filter)
+        ? prev.filter((f) => f !== filter)
+        : [...prev, filter]
     );
   }, []);
 
@@ -40,7 +51,11 @@ export default React.memo(function FiltersBar() {
             aria-expanded={openFilters.includes("curso")}
           >
             <span>Curso</span>
-            <span className={`ml-2 transition-transform ${openFilters.includes("curso") ? "rotate-90" : ""}`}>
+            <span
+              className={`ml-2 transition-transform ${
+                openFilters.includes("curso") ? "rotate-90" : ""
+              }`}
+            >
               ▼
             </span>
           </button>
@@ -50,7 +65,7 @@ export default React.memo(function FiltersBar() {
                 title="Curso"
                 options={CURSOS}
                 onApply={(sel: string[]) => console.log("Aplicar Curso:", sel)}
-                onCancel={() => toggleFilter("curso")} 
+                onCancel={() => toggleFilter("curso")}
                 idPrefix="curso"
               />
             </div>
@@ -63,7 +78,11 @@ export default React.memo(function FiltersBar() {
             aria-expanded={openFilters.includes("periodo")}
           >
             <span>Período</span>
-            <span className={`ml-2 transition-transform ${openFilters.includes("periodo") ? "rotate-90" : ""}`}>
+            <span
+              className={`ml-2 transition-transform ${
+                openFilters.includes("periodo") ? "rotate-90" : ""
+              }`}
+            >
               ▼
             </span>
           </button>
@@ -72,7 +91,9 @@ export default React.memo(function FiltersBar() {
               <FiltroCheckboxList
                 title="Período"
                 options={PERIODOS}
-                onApply={(sel: string[]) => console.log("Aplicar Período:", sel)}
+                onApply={(sel: string[]) =>
+                  console.log("Aplicar Período:", sel)
+                }
                 onCancel={() => toggleFilter("periodo")}
                 idPrefix="periodo"
               />
@@ -86,7 +107,11 @@ export default React.memo(function FiltersBar() {
             aria-expanded={openFilters.includes("status")}
           >
             <span>Status</span>
-            <span className={`ml-2 transition-transform ${openFilters.includes("status") ? "rotate-90" : ""}`}>
+            <span
+              className={`ml-2 transition-transform ${
+                openFilters.includes("status") ? "rotate-90" : ""
+              }`}
+            >
               ▼
             </span>
           </button>

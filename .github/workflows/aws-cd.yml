@@ -89,8 +89,8 @@ jobs:
           npm run build
         env:
           VITE_STAGE: ${{ env.VITE_STAGE}}
-          VITE_AUTH_CLIENT_ID: ${{ vars.VITE_AUTH_CLIENT_ID }}
-          VITE_AUTH_TENANT_ID: ${{ vars.VITE_AUTH_TENANT_ID }}
+          VITE_AUTH_CLIENT_ID: ${{ secrets.VITE_AUTH_CLIENT_ID }}
+          VITE_AUTH_TENANT_ID: ${{ secrets.VITE_AUTH_TENANT_ID }}
           VITE_USER_MSS: ${{ vars.VITE_USER_MSS }}
 
       - name: Setup envs

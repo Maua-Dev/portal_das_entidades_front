@@ -15,6 +15,7 @@ import { useUsers } from "../context/user-context";
 import { useAllUsers } from "../hooks/use-user";
 import CustomModal from "../components/custom-modal";
 import ImportForm from "../components/import-form";
+import { useUploadUsers } from "../hooks/use-user";
 
 export default function Home() {
   // const { entityId } = useParams();
@@ -26,11 +27,18 @@ export default function Home() {
 
   const { users, loadFromPayload } = useUsers();
 
+  const { mutate: uploadUsers } = useUploadUsers();
+
   useEffect(() => {
     if (data) {
       loadFromPayload(data);
     }
   }, [data, loadFromPayload]);
+
+  const handleFileImport = (file: File) => {
+    uploadUsers(file);
+    setImportFormOpen(false);
+  };
 
   const alunosFiltrados = users.filter(
     (aluno) =>
@@ -48,7 +56,7 @@ export default function Home() {
         onClose={() => setImportFormOpen(false)}
         title={"Importar Dados"}
       >
-        <ImportForm />
+        <ImportForm onFileImport={handleFileImport} />
       </CustomModal>
       <ProfileButton></ProfileButton>
       <Link to="/entidades">

@@ -1,5 +1,6 @@
 import { UserService } from "../services/user-service";
 import { useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 
 export function useAuthUser() {
   return useQuery({
@@ -33,3 +34,19 @@ export function useUser() {
     retry: 2,
   });
 }
+
+export function useUploadUsers() {
+  return useMutation({
+    mutationFn: async (file: File) => {
+      return await UserService.uploadUsers(file);
+    },
+    onSuccess: () => {
+      alert("Upload realizado com sucesso!");
+    },
+    onError: (error) => {
+      console.error(error);
+      alert("Erro ao fazer upload.");
+    }
+  });
+}
+

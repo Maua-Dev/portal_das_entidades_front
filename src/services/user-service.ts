@@ -24,4 +24,13 @@ export const UserService = {
     });
     return response.data;
   },
+  getUser: async () => {
+    const accessToken = localStorage.getItem("accessToken");
+    const response = await userMss.get("/get-user", {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return response.data;
+  },
 };

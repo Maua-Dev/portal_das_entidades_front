@@ -1,8 +1,16 @@
 export const COURSES = {
   ECM: "Engenharia da Computação",
+  ECA: "Engenharia de Computação e Automação",
   CIC: "Ciência da Computação",
   SIN: "Sistemas de Informação",
   ADM: "Administração",
+  EET: "Engenharia Elétrica",
+  EQM: "Engenharia Química",
+  DSG: "Design",
+  EAL: "Engenharia Agrícola",
+  EPM: "Engenharia de Produção",
+  ARQ: "Arquitetura",
+  RI: "Relações Internacionais",
   DSN: "Design",
   IAD: "Ciência de Dados e Inteligência Artificial",
 };

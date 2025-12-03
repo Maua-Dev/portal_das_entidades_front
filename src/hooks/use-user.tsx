@@ -22,3 +22,14 @@ export function useAllUsers() {
     retry: 2,
   });
 }
+
+export function useUser() {
+  return useQuery({
+    queryKey: ["userProfile"],
+    queryFn: async () => {
+      const response = await UserService.getUser();
+      return response
+    },
+    retry: 2,
+  });
+}

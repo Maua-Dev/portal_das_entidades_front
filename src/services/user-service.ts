@@ -52,4 +52,53 @@ export const UserService = {
     
     return response.data;
   },
+
+//A partir daq é meu:
+
+updateUser: async (
+  data: {
+    user_id: string;
+    name?: string;
+    email?: string;
+    ra?: string;
+    role?: string;
+    state?: string;
+    course?: string;
+    year?: number;
+    organization?: string;
+    active?: string;
+  }
+) => {
+  const accessToken = localStorage.getItem("accessToken");
+
+  const response = await userMss.put(
+    "/update-user",
+    data,
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  return response.data;
+},
+
+deleteUser: async (user_id: string) => {
+  const accessToken = localStorage.getItem("accessToken");
+
+  const response = await userMss.delete(
+    "/delete-user",
+    {
+      params: { user_id },
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+
+  return response.data;
+},
+
 };

@@ -4,7 +4,7 @@ import homeBackGround from "../assets/home-bg.jpg";
 import ProfileButton from "../components/profile";
 import ArrowButton from "../components/arrow";
 import { Link } from "react-router-dom";
-import AddButton from "../components/add-button";
+//import AddButton from "../components/add-button";
 import ImportButton from "../components/import-button";
 import ExportButton from "../components/export-button";
 import BellButton from "../components/bell-button";
@@ -43,7 +43,7 @@ export default function Home() {
   const alunosFiltrados = users.filter(
     (aluno) =>
       aluno.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      aluno.ra.toLowerCase().includes(searchTerm.toLowerCase())
+      aluno.ra.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   return (
@@ -66,7 +66,7 @@ export default function Home() {
       <div className="absolute top-28 inset-x-6 max-w-5/6 mx-auto">
         <div className="flex justify-between items-center">
           <div className="flex space-x-4">
-            <AddButton />
+            {/* <AddButton /> */}
             <ImportButton onClick={() => setImportFormOpen(true)} />
             <ExportButton />
           </div>
@@ -130,9 +130,9 @@ export default function Home() {
                                                   aluno.state === "PASSOU"
                                                     ? "bg-green-100 text-green-800"
                                                     : aluno.state ===
-                                                      "NAO_PASSOU"
-                                                    ? "bg-red-100 text-red-800"
-                                                    : "bg-yellow-100 text-yellow-800"
+                                                        "NAO_PASSOU"
+                                                      ? "bg-red-100 text-red-800"
+                                                      : "bg-yellow-100 text-yellow-800"
                                                 }`}
                       >
                         <option

@@ -22,7 +22,7 @@ export default function MemberManagement() {
   const [newMember, setNewMember] = useState({ name: "", email: "", role: "" });
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     setNewMember({ ...newMember, [e.target.name]: e.target.value });
   };

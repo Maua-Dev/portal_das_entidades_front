@@ -1,10 +1,9 @@
-// import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import homeBackGround from "../assets/home-bg.jpg";
 import ProfileButton from "../components/profile";
 import ArrowButton from "../components/arrow";
 import { Link } from "react-router-dom";
-//import AddButton from "../components/add-button";
+import WarningsModal from "../components/warning_modal";
 import ImportButton from "../components/import-button";
 import ExportButton from "../components/export-button";
 import BellButton from "../components/bell-button";
@@ -28,6 +27,8 @@ export default function Home() {
   const { users, loadFromPayload } = useUsers();
 
   const { mutate: uploadUsers } = useUploadUsers();
+
+  const [warningsOpen, setWarningsOpen] = useState(false);
 
   useEffect(() => {
     if (data) {
@@ -58,6 +59,8 @@ export default function Home() {
       >
         <ImportForm onFileImport={handleFileImport} />
       </CustomModal>
+      {warningsOpen && <WarningsModal onClose={() => setWarningsOpen(false)} />}
+
       <ProfileButton></ProfileButton>
       <Link to="/entidades">
         <ArrowButton></ArrowButton>
@@ -70,7 +73,7 @@ export default function Home() {
             <ImportButton onClick={() => setImportFormOpen(true)} />
             <ExportButton />
           </div>
-          <BellButton />
+          <BellButton onClick={() => setWarningsOpen(true)} />
         </div>
         <div className="py-4">
           <div className="flex items-center justify-between gap-4">

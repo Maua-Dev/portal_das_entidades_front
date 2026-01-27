@@ -65,11 +65,14 @@ export const WarningService = {
   deleteWarning: async (warning_id: string) => {
     try {
       const accessToken = localStorage.getItem("accessToken");
-      const response = await userMss.delete(`/delete-warning/${warning_id}`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
+      const response = await userMss.delete(
+        `/delete-warning?warning_id=${warning_id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
         },
-      });
+      );
       return response.data;
     } catch (error) {
       console.error("Erro ao deletar aviso:", error);

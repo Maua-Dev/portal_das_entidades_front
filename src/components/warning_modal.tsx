@@ -7,10 +7,14 @@ import ViewWarningModal from "./view_warning";
 import { useAllWarnings } from "../hooks/use-warning";
 
 interface Warning {
-  warning_id: string;
-  title: string;
-  expire: number;
-  description: string;
+  warning: {
+    warning_id: string;
+    body: {
+      title: string;
+      expire: number;
+      description: string;
+    };
+  };
 }
 
 interface WarningsModalProps {
@@ -57,10 +61,12 @@ export default function WarningsModal({ onClose }: WarningsModalProps) {
             ) : (
               warnings.map((warning) => (
                 <WarningCard
-                  key={warning.warning_id}
-                  title={warning.title}
-                  date={warning.expire}
-                  description={warning.description}
+                  key={warning.warning.warning_id}
+                  title={warning.warning.body.title}
+                  date={new Date(
+                    warning.warning.body.expire,
+                  ).toLocaleDateString()}
+                  description={warning.warning.body.description}
                   onButtonClick={() => {
                     setSelectedWarning(warning);
                     console.log("selectedWarning", selectedWarning);
@@ -81,11 +87,13 @@ export default function WarningsModal({ onClose }: WarningsModalProps) {
       {/* MODAL DE VISUALIZAÇÃO */}
       {selectedWarning && (
         <ViewWarningModal
-          warning_id={selectedWarning.warning_id}
+          warning_id={selectedWarning.warning.warning_id}
           onClose={() => setSelectedWarning(null)}
-          title={selectedWarning.title}
-          date={new Date(selectedWarning.expire).toLocaleDateString()}
-          description={selectedWarning.description}
+          title={selectedWarning.warning.body.title}
+          date={new Date(
+            selectedWarning.warning.body.expire,
+          ).toLocaleDateString()}
+          description={selectedWarning.warning.body.description}
         />
       )}
     </>

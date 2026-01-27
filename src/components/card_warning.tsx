@@ -2,7 +2,7 @@ import React from "react";
 
 interface WarningProps {
   title: string;
-  date: number;
+  date: string;
   description: string;
   buttonLabel?: string;
   onButtonClick?: () => void;

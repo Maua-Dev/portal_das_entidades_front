@@ -3,7 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 import { useMutation } from "@tanstack/react-query";
 import { useQueryClient } from "@tanstack/react-query";
 
-
 export function useAuthUser() {
   return useQuery({
     queryKey: ["user"],
@@ -31,7 +30,7 @@ export function useUser() {
     queryKey: ["userProfile"],
     queryFn: async () => {
       const response = await UserService.getUser();
-      return response
+      return response;
     },
     retry: 2,
   });
@@ -48,7 +47,7 @@ export function useUploadUsers() {
     onError: (error) => {
       console.error(error);
       alert("Erro ao fazer upload.");
-    }
+    },
   });
 }
 
@@ -84,7 +83,6 @@ export function useUpdateUser() {
   });
 }
 
-
 export function useDeleteUser() {
   const queryClient = useQueryClient();
 
@@ -107,5 +105,15 @@ export function useDeleteUser() {
 
       alert("Erro ao deletar usuário.");
     },
+  });
+}
+
+export function useExportUsers() {
+  return useQuery({
+    queryKey: ["exportUsers"],
+    queryFn: async () => {
+      return await UserService.exportUsers();
+    },
+    retry: 2,
   });
 }

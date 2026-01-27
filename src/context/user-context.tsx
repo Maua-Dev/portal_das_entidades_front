@@ -34,6 +34,7 @@ export interface UsersContextValue {
   removeUser: (userId: string) => void;
   getUserById: (userId: string) => User | undefined;
   loadFromPayload: (payload: UsersPayload) => void;
+  exportUsers: () => void;
 }
 
 const UsersContext = createContext<UsersContextValue | undefined>(undefined);
@@ -52,7 +53,7 @@ export function UsersProvider({ children }: { children: ReactNode }) {
 
   function updateUser(userId: string, patch: Partial<User>) {
     setUsers((prev) =>
-      prev.map((u) => (u.user_id === userId ? { ...u, ...patch } : u))
+      prev.map((u) => (u.user_id === userId ? { ...u, ...patch } : u)),
     );
   }
 
@@ -70,6 +71,11 @@ export function UsersProvider({ children }: { children: ReactNode }) {
     }
   }
 
+  function exportUsers() {
+    // This function can be implemented to trigger user export
+    alert("Exporting users...");
+  }
+
   const value: UsersContextValue = {
     profile,
     uploadProfile,
@@ -80,6 +86,7 @@ export function UsersProvider({ children }: { children: ReactNode }) {
     removeUser,
     getUserById,
     loadFromPayload,
+    exportUsers,
   };
 
   return (

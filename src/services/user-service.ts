@@ -11,7 +11,7 @@ export const UserService = {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
-      }
+      },
     );
     return response.data;
   },
@@ -32,31 +32,30 @@ export const UserService = {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
-    }
-    );
+    });
     return response.data;
   },
 
   uploadUsers: async (file: File) => {
-
     const file_base64 = await convertToBase64(file);
 
     const accessToken = localStorage.getItem("accessToken");
-    const response = await userMss.post("/upload-users", 
-      {file_base64: file_base64},
+    const response = await userMss.post(
+      "/upload-users",
+      { file_base64: file_base64 },
       {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
       },
-    });
-    
+    );
+
     return response.data;
   },
 
-//A partir daq é meu:
+  //A partir daq é meu:
 
-updateUser: async (
-  data: {
+  updateUser: async (data: {
     user_id: string;
     name?: string;
     email?: string;
@@ -67,38 +66,39 @@ updateUser: async (
     year?: number;
     organization?: string;
     active?: string;
-  }
-) => {
-  const accessToken = localStorage.getItem("accessToken");
+  }) => {
+    const accessToken = localStorage.getItem("accessToken");
 
-  const response = await userMss.put(
-    "/update-user",
-    data,
-    {
+    const response = await userMss.put("/update-user", data, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
       },
-    }
-  );
+    });
 
-  return response.data;
-},
+    return response.data;
+  },
 
-deleteUser: async (user_id: string) => {
-  const accessToken = localStorage.getItem("accessToken");
+  deleteUser: async (user_id: string) => {
+    const accessToken = localStorage.getItem("accessToken");
 
-  const response = await userMss.delete(
-    "/delete-user",
-    {
+    const response = await userMss.delete("/delete-user", {
       params: { user_id },
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
-    }
-  );
+    });
 
-  return response.data;
-},
+    return response.data;
+  },
 
+  exportUsers: async () => {
+    const accessToken = localStorage.getItem("accessToken");
+    const response = await userMss.get("/export-users", {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return response.data;
+  },
 };

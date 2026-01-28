@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import LoginBG from "../assets/login-bg.jpg";
 import { useIsAuthenticated, useMsal } from "@azure/msal-react";
 import { loginRequest } from "../auth/auth-config";
-import Logo_PE from "../assets/logo_pe.png";
+import Logo_PE from "../assets/Logo_PE.png";
 
 export default function HomePage() {
   const { instance } = useMsal();

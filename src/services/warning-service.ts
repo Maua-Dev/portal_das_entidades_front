@@ -5,7 +5,7 @@ export type ORG = "NAWAT" | "DEV" | "ESPORTS" | "META" | "GUARDIAN" | string;
 
 export interface CreateWarning {
   title: string;
-  expire: string;
+  expire: number;
   description: string;
   target_role: Role;
   target_org: ORG;

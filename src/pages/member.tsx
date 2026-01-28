@@ -1,4 +1,7 @@
 import { useState } from "react";
+import ArrowButton from "../components/arrow";
+import { Link } from "react-router-dom";
+import homeBackGround from "../assets/home-bg.jpg";
 
 interface Member {
   id: string;
@@ -22,7 +25,7 @@ export default function MemberManagement() {
   const [newMember, setNewMember] = useState({ name: "", email: "", role: "" });
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     setNewMember({ ...newMember, [e.target.name]: e.target.value });
   };
@@ -42,8 +45,14 @@ export default function MemberManagement() {
   };
 
   return (
-    <div className="min-h-screen bg-blue-100 flex flex-col items-center py-10">
-      <h1 className="text-2xl font-bold mb-6">Gerenciamento de Membros</h1>
+    <div 
+      className="min-h-screen bg-cover bg-center bg-no-repeat bg-fixed flex flex-col items-center py-10"
+      style={{ backgroundImage: `url(${homeBackGround})` }}
+    >
+      <Link to="/entidades">
+        <ArrowButton></ArrowButton>
+      </Link>
+      <h1 className="text-2xl font-bold text-gray-200 mb-6">Gerenciamento de Membros</h1>
       <div className="bg-white rounded-xl shadow-md p-6 w-full max-w-xl mb-8">
         <h2 className="text-lg font-semibold mb-4">Adicionar novo membro</h2>
         <div className="flex flex-col gap-3">

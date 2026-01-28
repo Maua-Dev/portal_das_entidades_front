@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import LoginBG from "../assets/login-bg.jpg";
 import { useIsAuthenticated, useMsal } from "@azure/msal-react";
 import { loginRequest } from "../auth/auth-config";
+import Logo_PE from "../assets/logo_pe.png";
 
 export default function HomePage() {
   const { instance } = useMsal();
@@ -42,12 +43,7 @@ export default function HomePage() {
           style={{ backgroundImage: `url(${LoginBG})` }}
         >
           <div className="text-center">
-            <div className="w-full h-64 bg-gray-200 rounded-lg flex items-center justify-center mb-4">
-              <span className="text-gray-400">Logo</span>
-            </div>
-            <p className="text-gray-500 text-sm">
-              Aq viria o logo do PE na frente daquele fundo roxo
-            </p>
+            <img src={Logo_PE} alt="Logo PE" className="max-h-96" />
           </div>
         </div>
 

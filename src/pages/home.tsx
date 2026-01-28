@@ -1,10 +1,9 @@
-// import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import homeBackGround from "../assets/home-bg.jpg";
 import ProfileButton from "../components/profile";
 import ArrowButton from "../components/arrow";
 import { Link } from "react-router-dom";
-import AddButton from "../components/add-button";
+import WarningsModal from "../components/warning_modal";
 import ImportButton from "../components/import-button";
 import ExportButton from "../components/export-button";
 import BellButton from "../components/bell-button";
@@ -15,6 +14,7 @@ import { useUsers } from "../context/user-context";
 import { useAllUsers } from "../hooks/use-user";
 import CustomModal from "../components/custom-modal";
 import ImportForm from "../components/import-form";
+import { useUploadUsers } from "../hooks/use-user";
 
 export default function Home() {
   // const { entityId } = useParams();
@@ -26,21 +26,30 @@ export default function Home() {
 
   const { users, loadFromPayload } = useUsers();
 
+  const { mutate: uploadUsers } = useUploadUsers();
+
+  const [warningsOpen, setWarningsOpen] = useState(false);
+
   useEffect(() => {
     if (data) {
       loadFromPayload(data);
     }
   }, [data, loadFromPayload]);
 
+  const handleFileImport = (file: File) => {
+    uploadUsers(file);
+    setImportFormOpen(false);
+  };
+
   const alunosFiltrados = users.filter(
     (aluno) =>
       aluno.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      aluno.ra.toLowerCase().includes(searchTerm.toLowerCase())
+      aluno.ra.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   return (
     <div
-      className="min-h-screen bg-cover bg-center bg-no-repeat bg-fixed relative"
+      className="min-h-screen bg-cover bg-center bg-no-repeat relative"
       style={{ backgroundImage: `url(${homeBackGround})` }}
     >
       <CustomModal
@@ -48,21 +57,34 @@ export default function Home() {
         onClose={() => setImportFormOpen(false)}
         title={"Importar Dados"}
       >
-        <ImportForm />
+        <div className="mb-4 flex items-center gap-3">
+          <span className="text-sm text-gray-600">Modelo de planilha:</span>
+
+          <a
+            href="../../public/Modelo_excel.xlsx"
+            download
+            className="inline-flex items-end gap-2 rounded-lg bg-purple-500 px-4 py-2 text-white transition hover:bg-purple-600"
+          >
+            Excel de exemplo
+          </a>
+        </div>
+        <ImportForm onFileImport={handleFileImport} />
       </CustomModal>
+      {warningsOpen && <WarningsModal onClose={() => setWarningsOpen(false)} />}
+
       <ProfileButton></ProfileButton>
       <Link to="/entidades">
         <ArrowButton></ArrowButton>
       </Link>
 
-      <div className="absolute top-28 inset-x-6 max-w-5/6 mx-auto">
+      <div className="absolute top-20 inset-x-4 max-w-5/6 mx-auto">
         <div className="flex justify-between items-center">
           <div className="flex space-x-4">
-            <AddButton />
+            {/* <AddButton /> */}
             <ImportButton onClick={() => setImportFormOpen(true)} />
             <ExportButton />
           </div>
-          <BellButton />
+          <BellButton onClick={() => setWarningsOpen(true)} />
         </div>
         <div className="py-4">
           <div className="flex items-center justify-between gap-4">
@@ -72,7 +94,7 @@ export default function Home() {
             <FiltersBar />
           </div>
         </div>
-        <div className="mt-4 bg-white rounded-3xl shadow overflow-y-auto px-6 max-h-[70vh]">
+        <div className="mt-2 bg-white rounded-3xl shadow overflow-y-auto px-2 max-h-[66vh]">
           <table className="min-w-full">
             <thead className="bg-gray-50 sticky top-0 shadow-[0_2px_0_0_rgba(209,213,219,1)]">
               <tr>
@@ -122,9 +144,9 @@ export default function Home() {
                                                   aluno.state === "PASSOU"
                                                     ? "bg-green-100 text-green-800"
                                                     : aluno.state ===
-                                                      "NAO_PASSOU"
-                                                    ? "bg-red-100 text-red-800"
-                                                    : "bg-yellow-100 text-yellow-800"
+                                                        "NAO_PASSOU"
+                                                      ? "bg-red-100 text-red-800"
+                                                      : "bg-yellow-100 text-yellow-800"
                                                 }`}
                       >
                         <option

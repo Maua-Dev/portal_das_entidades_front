@@ -35,7 +35,7 @@ export default function ViewWarningModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-      <div className="relative w-full max-w-2xl rounded-2xl bg-[#D9E3F2] p-6">
+      <div className="relative w-full max-w-2xl rounded-2xl bg-purple-200 p-6">
         {/* Close */}
         <button
           onClick={onClose}
@@ -59,17 +59,17 @@ export default function ViewWarningModal({
         </p>
 
         <div className="mt-8 flex justify-end gap-3">
-          <Button
+          {/* <Button
             onClick={onClose}
-            className="bg-gray-300 text-gray-700 hover:bg-gray-400"
+            className="bg-purple-300 text-gray-700 hover:bg-purple-400"
           >
             Fechar
-          </Button>
+          </Button> */}
 
           <Button
             onClick={handleDelete}
             disabled={isPending}
-            className="bg-red-400 text-white hover:bg-red-500"
+            className="bg-purple-800 text-white hover:bg-purple-900"
           >
             {isPending ? "Excluindo..." : "Excluir"}
           </Button>

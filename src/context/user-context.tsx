@@ -2,7 +2,7 @@
 import { createContext, useContext, useState } from "react";
 import type { ReactNode } from "react";
 
-export type Role = "USER" | "PRESIDENT" | string;
+export type Role = "USER" | "PRESIDENT" | "ADM" | string;
 export type State = "PENDING" | "APPROVED" | string;
 export type Active = "ACTIVE" | "INACTIVE" | string;
 

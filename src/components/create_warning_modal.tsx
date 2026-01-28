@@ -77,7 +77,7 @@ export default function NewWarningModal({
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-xl rounded-2xl bg-blue-100 p-6"
+        className="relative w-full max-w-xl rounded-2xl bg-purple-100 p-6"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close */}
@@ -88,35 +88,34 @@ export default function NewWarningModal({
           <IoClose size={20} />
         </button>
 
-        <h2 className="text-center text-3xl font-semibold text-blue-400">
+        <h2 className="text-center text-3xl font-semibold text-purple-400">
           Novo Aviso
         </h2>
 
-        <hr className="my-4 border-blue-300" />
-
+        <hr className="my-4 border-purple-300" />
         {/* FORM */}
         <div className="space-y-4">
           {/* Título + Data */}
           <div className="flex gap-4">
             <div className="flex-1">
-              <label className="text-sm text-blue-400">Título</label>
+              <label className="text-sm text-purple-400">Título</label>
               <input
                 type="text"
                 value={form.title}
                 onChange={(e) => setForm({ ...form, title: e.target.value })}
                 placeholder="Inserir..."
-                className="mt-1 w-full rounded-lg border border-blue-300 bg-transparent px-3 py-2 text-sm"
+                className="mt-1 w-full rounded-lg border border-purple-300 bg-transparent px-3 py-2 text-sm"
               />
             </div>
 
             <div className="w-40">
-              <label className="text-sm text-blue-400">Data limite</label>
+              <label className="text-sm text-purple-400">Data limite</label>
               <input
                 type="date"
                 value={form.expire}
                 onChange={(e) => setForm({ ...form, expire: e.target.value })}
                 placeholder="dd/mm/aaaa"
-                className="mt-1 w-full rounded-lg border border-blue-300 bg-transparent px-3 py-2 text-sm"
+                className="mt-1 w-full rounded-lg border border-purple-300 bg-transparent px-3 py-2 text-sm"
               />
             </div>
           </div>
@@ -124,13 +123,13 @@ export default function NewWarningModal({
           {/* Organização + Role */}
           <div className="flex gap-4">
             <div className="flex-1">
-              <label className="text-sm text-blue-400">Organização</label>
+              <label className="text-sm text-purple-400">Organização</label>
               <select
                 value={form.org}
                 onChange={(e) =>
                   setForm({ ...form, org: e.target.value as ORG })
                 }
-                className="mt-1 w-full rounded-lg border border-blue-300 bg-transparent px-3 py-2 text-sm"
+                className="mt-1 w-full rounded-lg border border-purple-300 bg-transparent px-3 py-2 text-sm"
               >
                 <option value="DEV">DEV</option>
                 <option value="NAWAT">NAWAT</option>
@@ -141,13 +140,13 @@ export default function NewWarningModal({
             </div>
 
             <div className="flex-1">
-              <label className="text-sm text-blue-400">Role</label>
+              <label className="text-sm text-purple-400">Role</label>
               <select
                 value={form.role}
                 onChange={(e) =>
                   setForm({ ...form, role: e.target.value as Role })
                 }
-                className="mt-1 w-full rounded-lg border border-blue-300 bg-transparent px-3 py-2 text-sm"
+                className="mt-1 w-full rounded-lg border border-purple-300 bg-transparent px-3 py-2 text-sm"
               >
                 <option value="USER">USER</option>
                 <option value="PRESIDENT">PRESIDENT</option>
@@ -158,7 +157,7 @@ export default function NewWarningModal({
 
           {/* Descrição */}
           <div>
-            <label className="text-sm text-blue-400">Descrição</label>
+            <label className="text-sm text-purple-400">Descrição</label>
             <textarea
               value={form.description}
               onChange={(e) =>
@@ -166,7 +165,7 @@ export default function NewWarningModal({
               }
               rows={4}
               placeholder="Inserir..."
-              className="mt-1 w-full resize-none rounded-lg border border-blue-300 bg-transparent px-3 py-2 text-sm"
+              className="mt-1 w-full resize-none rounded-lg border border-purple-300 bg-transparent px-3 py-2 text-sm"
             />
           </div>
         </div>

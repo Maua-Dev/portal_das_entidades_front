@@ -46,7 +46,9 @@ export default function ImportForm({ onFileImport }: ImportFormProps) {
         onDragLeave={handleDrag}
         onDrop={handleDrop}
         className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors duration-200 ${
-          dragActive ? "border-blue-500 bg-blue-50" : "border-gray-300 bg-white"
+          dragActive
+            ? "border-purple-500 bg-purple-50"
+            : "border-gray-300 bg-white"
         }`}
         style={{ cursor: "pointer" }}
       >

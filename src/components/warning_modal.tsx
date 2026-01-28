@@ -5,6 +5,7 @@ import CreateWarningCard from "./create_warning";
 import NewWarningModal from "./create_warning_modal";
 import ViewWarningModal from "./view_warning";
 import { useAllWarnings } from "../hooks/use-warning";
+import { useUsers } from "../context/user-context";
 
 interface Warning {
   warning: {
@@ -22,6 +23,7 @@ interface WarningsModalProps {
 }
 
 export default function WarningsModal({ onClose }: WarningsModalProps) {
+  const { profile } = useUsers();
   const [newWarningOpen, setNewWarningOpen] = useState(false);
   const [selectedWarning, setSelectedWarning] = useState<Warning | null>(null);
 
@@ -47,14 +49,15 @@ export default function WarningsModal({ onClose }: WarningsModalProps) {
             <IoClose size={20} />
           </button>
 
-          <h2 className="mb-6 text-center text-2xl font-semibold text-gray-300">
+          <h2 className="mb-6 text-center text-3xl font-bold text-black">
             Avisos
           </h2>
 
           <div className="grid grid-cols-2 gap-4">
             {/* CARD DE CRIAÇÃO */}
-            <CreateWarningCard onCreate={() => setNewWarningOpen(true)} />
-
+            {profile?.role === "ADM" && (
+              <CreateWarningCard onCreate={() => setNewWarningOpen(true)} />
+            )}
             {/* LISTA */}
             {isLoading ? (
               <p className="text-gray-400">Carregando avisos...</p>
@@ -79,10 +82,12 @@ export default function WarningsModal({ onClose }: WarningsModalProps) {
       </div>
 
       {/* MODAL DE CRIAR */}
-      <NewWarningModal
-        isOpen={newWarningOpen}
-        onClose={() => setNewWarningOpen(false)}
-      />
+      {profile?.role === "ADM" && (
+        <NewWarningModal
+          isOpen={newWarningOpen}
+          onClose={() => setNewWarningOpen(false)}
+        />
+      )}
 
       {/* MODAL DE VISUALIZAÇÃO */}
       {selectedWarning && (

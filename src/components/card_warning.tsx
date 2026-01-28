@@ -16,7 +16,7 @@ const Warning: React.FC<WarningProps> = ({
   onButtonClick,
 }) => {
   return (
-    <div className="w-full max-w-xl rounded-2xl bg-blue-100 p-5 shadow-sm">
+    <div className="w-full max-w-xl rounded-2xl bg-purple-100 p-5 shadow-sm">
       {/* Header */}
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold text-gray-800">{title}</h2>
@@ -32,7 +32,7 @@ const Warning: React.FC<WarningProps> = ({
       <div className="mt-4 flex justify-end">
         <button
           onClick={onButtonClick}
-          className="rounded-full bg-indigo-400 px-5 py-1.5 text-sm font-medium text-white transition hover:bg-indigo-500"
+          className="rounded-full bg-purple-400 px-5 py-1.5 text-sm font-medium text-white transition hover:bg-purple-500"
         >
           {buttonLabel}
         </button>

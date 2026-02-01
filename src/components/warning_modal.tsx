@@ -1,7 +1,6 @@
 import { IoClose } from "react-icons/io5";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import WarningCard from "./card_warning";
-import CreateWarningCard from "./create_warning";
 import NewWarningModal from "./create_warning_modal";
 import ViewWarningModal from "./view_warning";
 import { useAllWarnings } from "../hooks/use-warning";
@@ -27,9 +26,13 @@ export default function WarningsModal({ onClose }: WarningsModalProps) {
   const [newWarningOpen, setNewWarningOpen] = useState(false);
   const [selectedWarning, setSelectedWarning] = useState<Warning | null>(null);
 
-  const { data, isLoading } = useAllWarnings();
+  const { data, isLoading, refetch } = useAllWarnings();
 
   const warnings: Warning[] = data?.warnings ?? [];
+
+  useEffect(() => {
+    refetch();
+  }, [newWarningOpen, selectedWarning]);
 
   return (
     <>
@@ -39,25 +42,28 @@ export default function WarningsModal({ onClose }: WarningsModalProps) {
         onClick={onClose}
       >
         <div
-          className="relative w-full max-w-3xl rounded-2xl bg-white p-6"
+          className="w-full relative max-w-3xl min-h-2/3 max-h-2/3 overflow-y-scroll rounded-2xl bg-white"
           onClick={(e) => e.stopPropagation()}
         >
-          <button
-            onClick={onClose}
-            className="absolute right-4 top-4 text-gray-400 hover:text-gray-600"
-          >
-            <IoClose size={20} />
-          </button>
-
-          <h2 className="mb-6 text-center text-3xl font-bold text-black">
+          <h2 className="mb-6 fixed text-center justify-between max-w-3xl rounded-t-2xl flex px-6 py-4 bg-white/80 backdrop-blur-sm w-full pr-10 text-3xl font-bold text-black">
             Avisos
+            {profile?.role === "ADM" && (
+              <button
+                className="ml-4 inline-flex items-center rounded-full duration-200 hover:cursor-pointer bg-purple-400 px-4 py-2 text-sm font-semibold text-white hover:bg-purple-600"
+                onClick={() => setNewWarningOpen(true)}
+              >
+                +
+              </button>
+            )}
+            <button
+              onClick={onClose}
+              className="absolute left-[96%] hover:cursor-pointer  text-gray-400 hover:text-gray-600"
+            >
+              <IoClose size={20} />
+            </button>
           </h2>
 
-          <div className="grid grid-cols-2 gap-4">
-            {/* CARD DE CRIAÇÃO */}
-            {profile?.role === "ADM" && (
-              <CreateWarningCard onCreate={() => setNewWarningOpen(true)} />
-            )}
+          <div className="grid grid-cols-2 p-6 pt-20 gap-4 max-h-2/3">
             {/* LISTA */}
             {isLoading ? (
               <p className="text-gray-400">Carregando avisos...</p>

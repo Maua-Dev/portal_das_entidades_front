@@ -16,6 +16,28 @@ export const UserService = {
     return response.data;
   },
 
+  createUser: async (data: {
+    name: string;
+    email: string;
+    ra?: string;
+    role: string;
+    course?: string;
+    year?: number;
+    organization?: string;
+  }) => {
+    const accessToken = localStorage.getItem("accessToken");
+    const response = await userMss.post(
+      "/create-user",
+      { new_user: data },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      },
+    );
+    return response.data;
+  },
+
   getAllUsers: async () => {
     const accessToken = localStorage.getItem("accessToken");
     const response = await userMss.get("/get-all-users", {

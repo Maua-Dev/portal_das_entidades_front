@@ -3,6 +3,7 @@ import LoginBG from "../assets/login-bg.jpg";
 import { useIsAuthenticated, useMsal } from "@azure/msal-react";
 import { loginRequest } from "../auth/auth-config";
 import Logo_PE from "../assets/Logo_PE.png";
+import logoMicrosoft from "../assets/microsoftLogo.png";
 
 export default function HomePage() {
   const { instance } = useMsal();
@@ -50,21 +51,20 @@ export default function HomePage() {
         {/* Right Section - Microsoft Login Area */}
         <div className="w-full md:w-1/2 flex items-center justify-center p-8 bg-white">
           <div className="w-full max-w-md text-center">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">
-              Microsoft Login
-            </h2>
-            <p className="text-gray-600 mb-6">
+            <p className="text-gray-600 mb-6 text-2xl">
               Ao clicar no botão abaixo, você será redirecionado para a página
-              de login da Microsoft
+              de login da <span className="font-bold">Microsoft</span>
             </p>
-            <div className="bg-gray-100 p-8 rounded-lg border border-gray-200 hover:bg-gray-200 transition-colors duration-300 w-full cursor-pointer">
-              <button
-                className="text-gray-400 cursor-pointer"
-                onClick={handleLogin}
-              >
-                Microsoft login
-              </button>
-            </div>
+            <button
+              className="bg-gray-100 p-8 rounded-lg border border-gray-200 hover:bg-gray-200 transition-colors duration-300 w-full cursor-pointer"
+              onClick={handleLogin}
+            >
+              <img
+                src={logoMicrosoft}
+                alt="Microsoft Logo"
+                className="mx-auto w-1/2"
+              />
+            </button>
           </div>
         </div>
       </main>

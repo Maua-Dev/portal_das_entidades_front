@@ -6,6 +6,7 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { useMutation } from "@tanstack/react-query";
 import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 export function useWarning() {
   return useQuery({
@@ -26,6 +27,7 @@ export function useAllWarnings() {
       return response;
     },
     retry: 2,
+    refetchInterval: 10000,
   });
 }
 
@@ -44,7 +46,8 @@ export function useCreateWarning() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["warning"] });
-      alert("Aviso criado com sucesso!");
+      // alert("Aviso criado com sucesso!");
+      toast.success("Aviso criado com sucesso!");
     },
     onError: (error) => {
       console.error(error);
@@ -81,7 +84,8 @@ export function useDeleteWarning() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["warning"] });
-      alert("Aviso excluído com sucesso!");
+      // alert("Aviso excluído com sucesso!");
+      toast.success("Aviso excluído com sucesso!");
     },
     onError: (error) => {
       console.error(error);

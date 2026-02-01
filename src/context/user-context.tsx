@@ -1,6 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useState } from "react";
 import type { ReactNode } from "react";
+import { toast } from "react-toastify";
 
 export type Role = "USER" | "PRESIDENT" | "ADM" | string;
 export type State = "PENDING" | "APPROVED" | string;
@@ -73,7 +74,8 @@ export function UsersProvider({ children }: { children: ReactNode }) {
 
   function exportUsers() {
     // This function can be implemented to trigger user export
-    alert("Exporting users...");
+    // alert("Exporting users...");
+    toast.info("Exportando usuários...");
   }
 
   const value: UsersContextValue = {

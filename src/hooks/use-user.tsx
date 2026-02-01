@@ -2,6 +2,8 @@ import { UserService } from "../services/user-service";
 import { useQuery } from "@tanstack/react-query";
 import { useMutation } from "@tanstack/react-query";
 import { useQueryClient } from "@tanstack/react-query";
+import type { AxiosError } from "axios";
+import { toast } from "react-toastify";
 
 export function useAuthUser() {
   return useQuery({
@@ -11,6 +13,33 @@ export function useAuthUser() {
       return response;
     },
     retry: 2,
+  });
+}
+
+export function useCreateUser() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (data: {
+      name: string;
+      email: string;
+      ra?: string;
+      role: string;
+      course?: string;
+      year?: number;
+      organization?: string;
+    }) => {
+      return await UserService.createUser(data);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["allUsers"] });
+      // alert("Usuário criado com sucesso!");
+      toast.success("Usuário criado com sucesso!");
+    },
+    onError: (error) => {
+      console.error(error);
+      alert(`Erro ao criar usuário. ${error.message}`);
+    },
   });
 }
 
@@ -42,7 +71,8 @@ export function useUploadUsers() {
       return await UserService.uploadUsers(file);
     },
     onSuccess: () => {
-      alert("Upload realizado com sucesso!");
+      // alert("Upload realizado com sucesso!");
+      toast.success("Upload realizado com sucesso!");
     },
     onError: (error) => {
       console.error(error);
@@ -74,7 +104,8 @@ export function useUpdateUser() {
       queryClient.invalidateQueries({ queryKey: ["allUsers"] });
       queryClient.invalidateQueries({ queryKey: ["userProfile"] });
       queryClient.invalidateQueries({ queryKey: ["user"] });
-      alert("Usuário atualizado com sucesso!");
+      // alert("Usuário atualizado com sucesso!");
+      toast.success("Usuário atualizado com sucesso!");
     },
     onError: (error) => {
       console.error(error);
@@ -92,9 +123,9 @@ export function useDeleteUser() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["allUsers"] });
-      alert("Usuário deletado com sucesso!");
+      toast.success("Usuário deletado com sucesso!");
     },
-    onError: (error: any) => {
+    onError: (error: AxiosError) => {
       console.error(error);
 
       // se o backend retornar 403 quando não tem permissão:

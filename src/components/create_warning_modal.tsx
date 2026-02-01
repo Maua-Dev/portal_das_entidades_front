@@ -3,6 +3,7 @@ import { IoClose } from "react-icons/io5";
 import Button from "./button";
 import { useCreateWarning } from "../hooks/use-warning";
 import type { Role, ORG } from "../types/types";
+import { toast } from "react-toastify";
 
 interface NewWarningModalProps {
   isOpen: boolean;
@@ -42,7 +43,8 @@ export default function NewWarningModal({
     const { title, expire, description, role, org } = form;
 
     if (!title || !expire || !description || !role || !org) {
-      alert("Preencha todos os campos");
+      // alert("Preencha todos os campos");
+      toast.error("Preencha todos os campos");
       return;
     }
 
@@ -136,6 +138,7 @@ export default function NewWarningModal({
                 <option value="ESPORTS">ESPORTS</option>
                 <option value="META">META</option>
                 <option value="GUARDIAN">GUARDIAN</option>
+                <option value="ALL">TODAS</option>
               </select>
             </div>
 

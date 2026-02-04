@@ -1,8 +1,9 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useState } from "react";
 import type { ReactNode } from "react";
+import { toast } from "react-toastify";
 
-export type Role = "USER" | "PRESIDENT" | string;
+export type Role = "USER" | "PRESIDENT" | "ADM" | string;
 export type State = "PENDING" | "APPROVED" | string;
 export type Active = "ACTIVE" | "INACTIVE" | string;
 
@@ -34,6 +35,7 @@ export interface UsersContextValue {
   removeUser: (userId: string) => void;
   getUserById: (userId: string) => User | undefined;
   loadFromPayload: (payload: UsersPayload) => void;
+  exportUsers: () => void;
 }
 
 const UsersContext = createContext<UsersContextValue | undefined>(undefined);
@@ -52,7 +54,7 @@ export function UsersProvider({ children }: { children: ReactNode }) {
 
   function updateUser(userId: string, patch: Partial<User>) {
     setUsers((prev) =>
-      prev.map((u) => (u.user_id === userId ? { ...u, ...patch } : u))
+      prev.map((u) => (u.user_id === userId ? { ...u, ...patch } : u)),
     );
   }
 
@@ -70,6 +72,12 @@ export function UsersProvider({ children }: { children: ReactNode }) {
     }
   }
 
+  function exportUsers() {
+    // This function can be implemented to trigger user export
+    // alert("Exporting users...");
+    toast.info("Exportando usuários...");
+  }
+
   const value: UsersContextValue = {
     profile,
     uploadProfile,
@@ -80,6 +88,7 @@ export function UsersProvider({ children }: { children: ReactNode }) {
     removeUser,
     getUserById,
     loadFromPayload,
+    exportUsers,
   };
 
   return (

@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useUsers } from "../context/user-context";
 import { PiNewspaperLight } from "react-icons/pi";
 import { MdPhoneAndroid } from "react-icons/md";
+import homeBg from "../assets/home-bg.jpg";
 
 export default function Entities() {
   const { instance } = useMsal();
@@ -48,7 +49,12 @@ export default function Entities() {
   }
 
   return (
-    <div className="relative min-h-screen bg-blue-100 flex items-center justify-center">
+    <div
+      className="relative min-h-screen flex items-center justify-center bg-cover bg-center w-full"
+      style={{
+        backgroundImage: `url(${homeBg})`,
+      }}
+    >
       <button
         onClick={handleLogout}
         className="absolute top-24 right-4 flex items-center gap-2 bg-gradient-to-r from-red-500 to-red-700 text-white px-5 py-2 rounded-full shadow-lg hover:from-red-600 hover:to-red-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-400 hover:cursor-pointer"

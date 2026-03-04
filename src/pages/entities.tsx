@@ -62,7 +62,7 @@ export default function Entities() {
       >
         Sair
       </button>
-      {profile.role === "ADM" && (
+      {profile.role === "ADMIN" && (
         <div className="flex gap-10 text-white">
           <AdminButton
             title="Permissão"

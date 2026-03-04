@@ -13,12 +13,14 @@ export interface Warning {
   expire: number;
   description: string;
 }
+/* Define o q é um warning */
 
 export interface WarningsPayload {
   warnings: Warning[];
   created_at: number;
   message?: string;
 }
+/*Defini o q volta da request ou o q vai ir*/
 
 export interface WarningsContextValue {
   warnings: Warning[];
@@ -27,6 +29,8 @@ export interface WarningsContextValue {
   removeWarning: (warningId: number) => void;
   loadFromPayload: (payload: WarningsPayload) => void;
 }
+
+/* O é tem no context*/
 
 const WarningsContext = createContext<WarningsContextValue | undefined>(
   undefined,

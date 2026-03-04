@@ -34,7 +34,7 @@ export default function MemberManagement() {
 
   const members = users.filter(
     (user) =>
-      (user.role === "PRESIDENT" || user.role === "ADM") &&
+      (user.role === "PRESIDENT" || user.role === "ADMIN") &&
       user.email !== authUser?.user.email,
   );
 
@@ -104,7 +104,7 @@ export default function MemberManagement() {
             >
               <option value="">Selecione o cargo</option>
               <option value="USER">Membro</option>
-              <option value="ADM">Administrador</option>
+              <option value="ADMIN">Administrador</option>
               <option value="PRESIDENT">Presidente</option>
             </select>
             <select

@@ -153,7 +153,7 @@ export default function NewWarningModal({
               >
                 <option value="USER">USER</option>
                 <option value="PRESIDENT">PRESIDENT</option>
-                <option value="ADMIN">ADMIN</option>
+                <option value="ADM">ADMIN</option>
               </select>
             </div>
           </div>

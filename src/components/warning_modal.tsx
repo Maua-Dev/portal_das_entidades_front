@@ -47,7 +47,7 @@ export default function WarningsModal({ onClose }: WarningsModalProps) {
         >
           <h2 className="mb-6 fixed text-center justify-between max-w-3xl rounded-t-2xl flex px-6 py-4 bg-white/80 backdrop-blur-sm w-full pr-10 text-3xl font-bold text-black">
             Avisos
-            {profile?.role === "ADMIN" && (
+            {profile?.role === "ADM" && (
               <button
                 className="ml-4 inline-flex items-center rounded-full duration-200 hover:cursor-pointer bg-purple-400 px-4 py-2 text-sm font-semibold text-white hover:bg-purple-600"
                 onClick={() => setNewWarningOpen(true)}
@@ -88,7 +88,7 @@ export default function WarningsModal({ onClose }: WarningsModalProps) {
       </div>
 
       {/* MODAL DE CRIAR */}
-      {profile?.role === "ADMIN" && (
+      {profile?.role === "ADM" && (
         <NewWarningModal
           isOpen={newWarningOpen}
           onClose={() => setNewWarningOpen(false)}

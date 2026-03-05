@@ -2,7 +2,7 @@
 import { createContext, useContext, useState } from "react";
 import type { ReactNode } from "react";
 
-export type Role = "USER" | "PRESIDENT" | "ADMIN" | string;
+export type Role = "USER" | "PRESIDENT" | "ADM" | string;
 export type ORG = "NAWAT" | "DEV" | "ESPORTS" | "META" | "GUARDIAN" | string;
 
 export interface Warning {

@@ -16,7 +16,7 @@ jobs:
       id-token: write
       contents: read
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Determine AWS Account ID and Region
         run: |
@@ -40,36 +40,27 @@ jobs:
           fi
 
       - name: Use Node.js 20.x
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 20.x
-      - uses: actions/checkout@v2
-      - name: Setup AWS Credentials
-        id: aws-credentials
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          aws-region: ${{ env.AWS_REGION }}
-          role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/GithubActionsRole
-          role-session-name: github-action
-      - name: Use Node.js 20.x
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20.x
+          node-version: 20
+
       - name: Setting stage and stack name
         run: |
           if [[ "${{ github.ref_name }}" == "dev" ]]; then
-            echo "STAGE=dev" >> $GITHUB_ENV
-            echo "ACM_CERTIFICATE_ARN=${{ secrets.DEV_ACM_DEVMAUA_CERTIFICATE_ARN }}" >> $GITHUB_ENV
+            STAGE=dev
+            ACM_CERTIFICATE_ARN="${{ secrets.DEV_ACM_DEVMAUA_CERTIFICATE_ARN }}"
           elif [[ "${{ github.ref_name }}" == "homolog" ]]; then
-            echo "STAGE=homolog" >> $GITHUB_ENV
-            echo "ACM_CERTIFICATE_ARN=${{ secrets.HML_ACM_DEVMAUA_CERTIFICATE_ARN }}" >> $GITHUB_ENV
+            STAGE=homolog
+            ACM_CERTIFICATE_ARN="${{ secrets.HML_ACM_DEVMAUA_CERTIFICATE_ARN }}"
           elif [[ "${{ github.ref_name }}" == "prod" ]]; then
-            echo "STAGE=prod" >> $GITHUB_ENV
-            echo "ACM_CERTIFICATE_ARN=${{ secrets.PROD_ACM_DEVMAUA_CERTIFICATE_ARN }}" >> $GITHUB_ENV
+            STAGE=prod
+            ACM_CERTIFICATE_ARN="${{ secrets.PROD_ACM_DEVMAUA_CERTIFICATE_ARN }}"
           else
             echo "Invalid branch name!" && exit 1
           fi
-          echo "STACK_NAME=PortalDasEntidadesStackFront${{env.STAGE}}" >> $GITHUB_ENV
+          echo "STAGE=$STAGE" >> $GITHUB_ENV
+          echo "ACM_CERTIFICATE_ARN=$ACM_CERTIFICATE_ARN" >> $GITHUB_ENV
+          echo "STACK_NAME=PortalDasEntidadesStackFront${STAGE}" >> $GITHUB_ENV
           echo "ALTERNATIVE_DOMAIN_NAME=${{ vars.DOMAIN_NAME }}" >> $GITHUB_ENV
 
       - name: Setup AWS Credentials
@@ -78,6 +69,19 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
           role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/GithubActionsRole
           role-session-name: github-action-${{ github.run_id }}
+
+      - name: Fetch VITE_USER_MSS from SSM
+        run: |
+          set -euo pipefail
+          VITE_USER_MSS=$(aws ssm get-parameter \
+            --name "/portalentidades/${{ env.STAGE }}/api/url" \
+            --query "Parameter.Value" --output text)
+          if [ -z "$VITE_USER_MSS" ]; then
+            echo "SSM parameter /portalentidades/${{ env.STAGE }}/api/url returned empty value"
+            exit 1
+          fi
+          echo "::add-mask::$VITE_USER_MSS"
+          echo "VITE_USER_MSS=$VITE_USER_MSS" >> "$GITHUB_ENV"
 
       - name: Installing Dependencies
         run: |
@@ -88,10 +92,10 @@ jobs:
         run: |
           npm run build
         env:
-          VITE_STAGE: ${{ env.VITE_STAGE}}
+          VITE_STAGE: ${{ env.STAGE }}
           VITE_AUTH_CLIENT_ID: ${{ secrets.VITE_AUTH_CLIENT_ID }}
           VITE_AUTH_TENANT_ID: ${{ secrets.VITE_AUTH_TENANT_ID }}
-          VITE_USER_MSS: ${{ vars.VITE_USER_MSS }}
+          VITE_USER_MSS: ${{ env.VITE_USER_MSS }}
 
       - name: Setup envs
         run: |
@@ -100,7 +104,7 @@ jobs:
           echo STACK_NAME=${{ env.STACK_NAME }} >> $GITHUB_ENV
           echo GITHUB_REF_NAME=${{ env.STAGE }} >> $GITHUB_ENV
           echo AWS_REGION=${{ env.AWS_REGION }} >> $GITHUB_ENV
-          echo VITE_USER_MSS=${{ vars.VITE_USER_MSS }} >> $GITHUB_ENV
+          echo "VITE_USER_MSS=${{ env.VITE_USER_MSS }}" >> $GITHUB_ENV
           echo ALTERNATIVE_DOMAIN_NAME=${{ vars.DOMAIN_NAME }} >> $GITHUB_ENV
 
       - name: Deploy with CDK
